@@ -1,21 +1,22 @@
 package com.backend_assignment.abhay.Service;
 
 import com.backend_assignment.abhay.Entity.Teacher;
-import org.springframework.stereotype.Component;
+import com.backend_assignment.abhay.Repository.TeacherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class TeacherService {
-    public List<Teacher> getTeacher() {
-        return List.of(
-                new Teacher(
-                "Abhay",
-                "Maths",
-                "abhay@gmail.com",
-                "Active",
-                "Full-time"));
+    private final TeacherRepository teacherRepository;
 
+    @Autowired
+    public TeacherService(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
+    }
+
+    public List<Teacher> getTeacher() {
+        return teacherRepository.findAll();
     }
 }
