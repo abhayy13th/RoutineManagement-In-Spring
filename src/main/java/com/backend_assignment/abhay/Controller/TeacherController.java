@@ -3,9 +3,7 @@ package com.backend_assignment.abhay.Controller;
 import com.backend_assignment.abhay.Entity.Teacher;
 import com.backend_assignment.abhay.Service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,10 @@ public class TeacherController {
     @GetMapping
     public List<Teacher> getTeacher() {
         return teacherService.getTeacher();
+    }
+
+    @PostMapping
+    public void registerNewTeacher(@RequestBody Teacher teacher) {
+        teacherService.addNewTeacher(teacher);
     }
 }

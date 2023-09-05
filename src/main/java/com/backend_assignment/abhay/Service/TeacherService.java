@@ -19,4 +19,16 @@ public class TeacherService {
     public List<Teacher> getTeacher() {
         return teacherRepository.findAll();
     }
+
+    public void addNewTeacher(Teacher teacher) {
+       teacherRepository.findTeacherByEmail(teacher.getEmail())
+               .ifPresentOrElse(
+                       t -> {
+                           throw new IllegalStateException("Email already taken");
+                       },
+                       () -> {
+                           teacherRepository.save(teacher);
+                       });
+
+    }
 }
