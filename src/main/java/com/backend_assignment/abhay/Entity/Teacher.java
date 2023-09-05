@@ -19,12 +19,12 @@ public class Teacher {
             strategy = GenerationType.SEQUENCE,
             generator = "teacher_sequence"
     )
-    private Long id;
+    private Long teacherId;
     private String name;
     private String subject;
     private String email;
 
-    @Transient
+
     private String status = Status.ACTIVE.getStatusCode();
 
     private String type = TeacherType.FULL_TIME.getTypeCode();
@@ -40,8 +40,8 @@ public class Teacher {
         this.type = type;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
     public void setName(String name) {
@@ -67,7 +67,7 @@ public class Teacher {
     @Override
     public String toString() {
         return "Teacher{" +
-                "id=" + id +
+                "teacherId=" + teacherId +
                 ", name='" + name + '\'' +
                 ", subject='" + subject + '\'' +
                 ", email='" + email + '\'' +

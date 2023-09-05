@@ -22,8 +22,29 @@ public class TeacherController {
         return teacherService.getTeacher();
     }
 
+    @GetMapping(path = "{teacherId}")
+    public Teacher getTeacherById(@PathVariable("teacherId") Long teacherId) {
+        return teacherService.getTeacherById(teacherId);
+    }
+
+
     @PostMapping
     public void registerNewTeacher(@RequestBody Teacher teacher) {
         teacherService.addNewTeacher(teacher);
+    }
+
+    @PutMapping(path = "{teacherId}")
+    public void updateTeacher(
+            @PathVariable("teacherId") Long teacherId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String subject,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String type) {
+        teacherService.updateTeacher(teacherId, name, subject, email, type);
+    }
+
+    @DeleteMapping(path = "{teacherId}")
+    public void deleteTeacher(@PathVariable("teacherId") Long teacherId) {
+        teacherService.deleteTeacher(teacherId);
     }
 }
