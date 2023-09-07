@@ -1,5 +1,6 @@
 package com.backend_assignment.abhay.Service;
 
+import com.backend_assignment.abhay.Entity.Enum.Status;
 import com.backend_assignment.abhay.Entity.Teacher;
 import com.backend_assignment.abhay.Repository.TeacherRepository;
 import jakarta.transaction.Transactional;
@@ -23,6 +24,10 @@ public class TeacherService {
         return teacherRepository.findAll();
     }
 
+    public List<Teacher> getTeacherNotDeleted() {
+        return teacherRepository.findAllByStatusNot();
+    }
+
     public void addNewTeacher(Teacher teacher) {
        teacherRepository.findTeacherByEmail(teacher.getEmail())
                .ifPresentOrElse(
@@ -44,30 +49,32 @@ public class TeacherService {
     }
 
     @Transactional
-    public void updateTeacher(Long teacherId, String name, String subject, String email, String type) {
+    public void updateTeacher(Long teacherId, Teacher updatedTeacher) {
         Teacher teacher = teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new IllegalStateException("Teacher with id " + teacherId + " does not exists"));
 
-        if (name != null && !name.isEmpty() && !Objects.equals(name, teacher.getName())) {
-            teacher.setName(name);
+        if (updatedTeacher.getName() != null && !updatedTeacher.getName().isEmpty() && !Objects.equals(updatedTeacher.getName(), teacher.getName())) {
+            teacher.setName(updatedTeacher.getName());
         }
 
-        if (subject != null && !subject.isEmpty() && !Objects.equals(teacher.getSubject(),subject)) {
-            teacher.setSubject(subject);
+        if (updatedTeacher.getSubject() != null && !updatedTeacher.getSubject().isEmpty() && !Objects.equals(teacher.getSubject(),updatedTeacher.getSubject())) {
+            teacher.setSubject(updatedTeacher.getSubject());
         }
 
-        if (email != null && !email.isEmpty() && !Objects.equals(email, teacher.getEmail())) {
-            Optional<Teacher> teacherOptional = teacherRepository.findTeacherByEmail(email);
+        if (updatedTeacher.getEmail() != null && !updatedTeacher.getEmail().isEmpty() && !Objects.equals(updatedTeacher.getEmail(), teacher.getEmail())) {
+            Optional<Teacher> teacherOptional = teacherRepository.findTeacherByEmail(updatedTeacher.getEmail());
             if (teacherOptional.isPresent()) {
                 throw new IllegalStateException("Email already taken");
             }
-            teacher.setEmail(email);
+            teacher.setEmail(updatedTeacher.getEmail());
 
         }
 
-        if (type != null && !type.isEmpty() && !Objects.equals(teacher.getType(),type)) {
-            teacher.setType(type);
+        if (updatedTeacher.getType() != null && !updatedTeacher.getType().isEmpty() && !Objects.equals(teacher.getType(),updatedTeacher.getType())) {
+            teacher.setType(updatedTeacher.getType());
         }
+        teacherRepository.save(teacher);
+
 
     }
 
@@ -75,5 +82,20 @@ public class TeacherService {
     public Teacher getTeacherById(Long teacherId) {
         return teacherRepository.findById(teacherId)
                 .orElseThrow(() -> new IllegalStateException("Teacher with id " + teacherId + " does not exists"));
+    }
+    @Transactional
+    public void safeDeleteTeacherById(Long teacherId){
+        Teacher teacher = teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new IllegalStateException("Teacher with id " + teacherId + " does not exists"));
+        if(teacher.getStatus() == null || teacher.getStatus().isEmpty()) {
+            throw new IllegalStateException("Status cannot be null or empty");
+        }
+        if(teacher.getStatus().equals("X")){
+            throw new IllegalStateException("Teacher with id " + teacherId + " is already safe deleted");
+        }
+
+            teacher.setStatus("X");
+            teacherRepository.save(teacher);
+
     }
 }

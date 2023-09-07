@@ -22,9 +22,15 @@ public class TeacherController {
         return teacherService.getTeacher();
     }
 
+
     @GetMapping(path = "{teacherId}")
     public Teacher getTeacherById(@PathVariable("teacherId") Long teacherId) {
         return teacherService.getTeacherById(teacherId);
+    }
+
+    @GetMapping(path = "/active")
+    public List<Teacher> getTeacherNotDeleted() {
+        return teacherService.getTeacherNotDeleted();
     }
 
 
@@ -35,16 +41,17 @@ public class TeacherController {
 
     @PutMapping(path = "{teacherId}")
     public void updateTeacher(
-            @PathVariable("teacherId") Long teacherId,
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String subject,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String type) {
-        teacherService.updateTeacher(teacherId, name, subject, email, type);
+            @PathVariable("teacherId") Long teacherId, @RequestBody Teacher teacher){
+        teacherService.updateTeacher(teacherId, teacher);
+
     }
 
     @DeleteMapping(path = "{teacherId}")
     public void deleteTeacher(@PathVariable("teacherId") Long teacherId) {
         teacherService.deleteTeacher(teacherId);
+    }
+    @PutMapping(path = "/safedelete/{teacherId}")
+    public void updateTeacherStatus(@PathVariable("teacherId") Long teacherId){
+        teacherService.safeDeleteTeacherById(teacherId);
     }
 }
