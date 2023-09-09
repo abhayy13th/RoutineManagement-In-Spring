@@ -2,6 +2,7 @@ package com.backend_assignment.abhay.Controller;
 
 import com.backend_assignment.abhay.Entity.StudentGroup;
 import com.backend_assignment.abhay.Service.GroupService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,10 @@ public class GroupController {
         this.groupService = groupService;
     }
 
+    /**
+     * Get all the groups
+     * @return - List of all the groups
+     */
     @GetMapping
     public List<StudentGroup> getGroup() {
         return groupService.getGroupList();
@@ -37,5 +42,7 @@ public class GroupController {
     public void updateGroup(@PathVariable("id") Long id, @RequestBody StudentGroup studentGroup) {
         groupService.updateGroup(id, studentGroup);
     }
+
+
 
 }

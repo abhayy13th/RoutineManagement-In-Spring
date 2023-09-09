@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import java.sql.Time;
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
+
 @Getter
 @Setter
 @Entity
@@ -19,10 +19,11 @@ public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long r_id;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate routineDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private Time startTime;
+    private Time endTime;
     private String room;
     private String subject;
 
