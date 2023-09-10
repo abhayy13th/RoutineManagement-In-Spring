@@ -20,20 +20,15 @@ public class GroupService {
         return groupRepository.findAll();
     }
 
-    public void addNewGroup(StudentGroup studentGroup) {
+    public StudentGroup addNewGroup(StudentGroup studentGroup) {
         if (studentGroup.getId() == null) {
-            this.groupRepository.save(studentGroup);
-            return;
+           return this.groupRepository.save(studentGroup);
+
         }
-        groupRepository.findById(studentGroup.getId())
-                .ifPresentOrElse(
-                        g -> {
-                            throw new IllegalStateException("Group with id " + studentGroup.getId() + " already exists");
-                        },
-                        () -> {
-                            groupRepository.save(studentGroup);
-                        }
-                );
+        else{
+            throw new IllegalStateException("Group with id " + studentGroup.getId() + " does not exists");
+        }
+
 
     }
 

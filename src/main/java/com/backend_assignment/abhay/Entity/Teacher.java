@@ -3,11 +3,13 @@ package com.backend_assignment.abhay.Entity;
 import com.backend_assignment.abhay.Entity.Enum.Status;
 import com.backend_assignment.abhay.Entity.Enum.TeacherType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 public class Teacher {

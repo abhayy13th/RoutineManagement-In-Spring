@@ -26,20 +26,13 @@ public class RoutineService {
         return routineRepository.findAll();
     }
 
-    public void addNewRoutine(Routine routine) {
-        if (routine.getR_id() == null) {
-            this.routineRepository.save(routine);
-            return;
+    public Routine addNewRoutine(Routine routine) {
+
+        if (routine.getR_id() != null && routineRepository.existsById(routine.getR_id())) {
+            throw new IllegalStateException("Routine with id " + routine.getR_id() + " already exists");
         }
-        routineRepository.findById(routine.getR_id())
-                .ifPresentOrElse(
-                        r -> {
-                            throw new IllegalStateException("Routine with id " + routine.getR_id() + " already exists");
-                        },
-                        () -> {
-                            routineRepository.save(routine);
-                        }
-                );
+        return routineRepository.save(routine);
+
 
 
     }

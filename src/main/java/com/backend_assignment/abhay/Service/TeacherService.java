@@ -28,16 +28,11 @@ public class TeacherService {
         return teacherRepository.findAllByStatusNot();
     }
 
-    public void addNewTeacher(Teacher teacher) {
-       teacherRepository.findTeacherByEmail(teacher.getEmail())
-               .ifPresentOrElse(
-                       t -> {
-                           throw new IllegalStateException("Email already taken");
-                       },
-                       () -> {
-                           teacherRepository.save(teacher);
-                       });
-
+    public Teacher addNewTeacher(Teacher teacher) {
+        if (teacherRepository.findTeacherByEmail(teacher.getEmail()).isPresent()) {
+            throw new IllegalStateException("Email already taken");
+        }
+        return teacherRepository.save(teacher);
     }
 
     public void deleteTeacher(Long teacherId) {

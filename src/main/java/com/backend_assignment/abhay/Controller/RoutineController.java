@@ -25,8 +25,9 @@ public class RoutineController {
         return routineService.getRoutine();
     }
     @PostMapping(path = "/add")
-    public void addNewRoutine(@RequestBody Routine routine) {
-        routineService.addNewRoutine(routine);
+    public Routine addNewRoutine(@RequestBody Routine routine) {
+
+        return routineService.addNewRoutine(routine);
     }
     @PutMapping(path = "/update/{r_id}")
     public void updateRoutine(@PathVariable("r_id") Long r_id, @RequestBody Routine routine) {

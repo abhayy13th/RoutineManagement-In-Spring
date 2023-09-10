@@ -29,8 +29,8 @@ public class GroupController {
     }
 
     @PostMapping(path = "/add")
-    public void addNewGroup(@RequestBody StudentGroup studentGroup) {
-        groupService.addNewGroup(studentGroup);
+    public StudentGroup addNewGroup(@RequestBody StudentGroup studentGroup) {
+        return groupService.addNewGroup(studentGroup);
     }
 
     @DeleteMapping(path = "/delete/{id}")

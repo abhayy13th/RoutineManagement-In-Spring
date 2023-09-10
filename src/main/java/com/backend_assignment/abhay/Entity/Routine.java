@@ -1,8 +1,7 @@
 package com.backend_assignment.abhay.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -10,6 +9,10 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity

@@ -35,8 +35,8 @@ public class TeacherController {
 
 
     @PostMapping
-    public void registerNewTeacher(@RequestBody Teacher teacher) {
-        teacherService.addNewTeacher(teacher);
+    public Teacher registerNewTeacher(@RequestBody Teacher teacher) {
+       return teacherService.addNewTeacher(teacher);
     }
 
     @PutMapping(path = "{teacherId}")
