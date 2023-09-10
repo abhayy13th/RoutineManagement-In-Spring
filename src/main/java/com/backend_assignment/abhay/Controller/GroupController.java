@@ -28,15 +28,32 @@ public class GroupController {
         return groupService.getGroupList();
     }
 
+    /**
+     * Add a new group
+     * @param studentGroup - Group to be added
+     * @return - Group added
+     */
+
     @PostMapping(path = "/add")
     public StudentGroup addNewGroup(@RequestBody StudentGroup studentGroup) {
         return groupService.addNewGroup(studentGroup);
     }
 
+    /**
+     * Delete a group
+     * @param id - Id of the group to be deleted
+     */
+
     @DeleteMapping(path = "/delete/{id}")
     public void deleteGroup(@PathVariable("id") Long id) {
         groupService.deleteGroup(id);
     }
+
+    /**
+     * Update a group
+     * @param id - Id of the group to be updated
+     * @param studentGroup - Group to be updated
+     */
 
     @PutMapping(path = "/update/{id}")
     public void updateGroup(@PathVariable("id") Long id, @RequestBody StudentGroup studentGroup) {
