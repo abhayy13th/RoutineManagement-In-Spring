@@ -51,7 +51,7 @@ public class TeacherController {
     }
     /**
      * Update a teacher
-     * @param teacherId - Id of the teacher to be updated
+     * @param teacherId - ID of the teacher to be updated
      * @param teacher - Teacher to be updated
      */
     @PutMapping(path = "{teacherId}")
@@ -62,7 +62,7 @@ public class TeacherController {
     }
     /**
      * Delete a teacher
-     * @param teacherId - Id of the teacher to be deleted
+     * @param teacherId - ID of the teacher to be deleted
      */
     @DeleteMapping(path = "{teacherId}")
     public void deleteTeacher(@PathVariable("teacherId") Long teacherId) {
@@ -71,10 +71,10 @@ public class TeacherController {
 
     /**
      * Update the status of a teacher to deleted
-     * @param teacherId - Id of the teacher to be updated
+     * @param teacherId - ID of the teacher to be updated
      */
 
-    @PutMapping(path = "/safedelete/{teacherId}")
+    @PutMapping(path = "/safeDelete/{teacherId}")
     public void updateTeacherStatus(@PathVariable("teacherId") Long teacherId){
         teacherService.safeDeleteTeacherById(teacherId);
     }

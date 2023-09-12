@@ -2,7 +2,6 @@ package com.backend_assignment.abhay.Controller;
 
 import com.backend_assignment.abhay.Entity.StudentGroup;
 import com.backend_assignment.abhay.Service.GroupService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +40,7 @@ public class GroupController {
 
     /**
      * Delete a group
-     * @param id - Id of the group to be deleted
+     * @param id - ID of the group to be deleted
      */
 
     @DeleteMapping(path = "/delete/{id}")
@@ -51,7 +50,7 @@ public class GroupController {
 
     /**
      * Update a group
-     * @param id - Id of the group to be updated
+     * @param id - ID of the group to be updated
      * @param studentGroup - Group to be updated
      */
 

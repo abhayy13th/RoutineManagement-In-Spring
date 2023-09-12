@@ -7,7 +7,7 @@ import com.backend_assignment.abhay.Service.RoutineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController
@@ -42,8 +42,9 @@ public class RoutineController {
     }
 
     /**
-     * Delete a routine
-     * @param r_id - Id of the routine to be deleted
+     * Update a routine
+     * @param r_id - ID of the routine to be updated
+     * @param routine - Routine to be updated
      */
 
     @PutMapping(path = "/update/{r_id}")
@@ -52,10 +53,10 @@ public class RoutineController {
     }
 
     /**
-     * Update a routine
-     * @param r_id - Id of the routine to be updated
-     * @param routine - Routine to be updated
+     * Delete a routine
+     * @param r_id - ID of the routine to be deleted
      */
+
 
     @DeleteMapping(path = "/delete/{r_id}")
     public void deleteRoutine(@PathVariable("r_id") Long r_id) {
@@ -64,8 +65,8 @@ public class RoutineController {
 
     /**
      * Get the work hours of a teacher  between two dates
-     * @param workHourDTO
-     * @return
+     * @param workHourDTO - Teacher name, start date and end date
+     * @return work hours of the teacher in the given dates
      */
     @GetMapping(path = "/getWorkHours")
     public Integer getWorkHours(@RequestBody WorkHourDTO workHourDTO) {
@@ -74,8 +75,8 @@ public class RoutineController {
 
     /**
      * Get the work hours of a group
-     * @param groupWorkHoursDTO
-     * @return
+     * @param groupWorkHoursDTO - Group id
+     * @return the work hours of the group
      */
 
     @GetMapping(path = "/getGroupWorkHours")
